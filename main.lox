@@ -6,4 +6,8 @@ fun check(a,b) {
     return a+b;
 }
 
+var a1= "rohit";
+a1 = a1 +" 4";
+print a1;
+
 var b="G5_Final_Year";
