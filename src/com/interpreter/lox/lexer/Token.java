@@ -1,5 +1,7 @@
 package com.interpreter.lox.lexer;
 
+import com.interpreter.lox.lexer.TokenType;
+
 public class Token {
     public final TokenType type;
     public final String lexeme;

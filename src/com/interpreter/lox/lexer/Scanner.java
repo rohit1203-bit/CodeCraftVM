@@ -26,19 +26,19 @@ public class Scanner {
     static {
         keywords = new HashMap<>();
         keywords.put("and", AND);
-        keywords.put("or", OR);
         keywords.put("class", CLASS);
         keywords.put("else", ELSE);
-        keywords.put("true", TRUE);
         keywords.put("false", FALSE);
         keywords.put("for", FOR);
         keywords.put("fun", FUN);
         keywords.put("if", IF);
         keywords.put("nil", NIL);
+        keywords.put("or", OR);
         keywords.put("print", PRINT);
         keywords.put("return", RETURN);
         keywords.put("super", SUPER);
         keywords.put("this", THIS);
+        keywords.put("true", TRUE);
         keywords.put("var", VAR);
         keywords.put("while", WHILE);
     }
@@ -60,6 +60,7 @@ public class Scanner {
     private void scanToken() {
         char c = advance();
         switch (c) {
+            // Single character lexemes
             case '(': addToken(LEFT_PAREN); break;
             case ')': addToken(RIGHT_PAREN); break;
             case '{': addToken(LEFT_BRACE); break;
@@ -71,6 +72,7 @@ public class Scanner {
             case ';': addToken(SEMICOLON); break;
             case '*': addToken(STAR); break;
 
+            // Double character lexemes
             case '!':
                 addToken(match('=') ? BANG_EQUAL: BANG);
                 break;
@@ -84,8 +86,12 @@ public class Scanner {
                 addToken(match('=') ? GREATER_EQUAL: GREATER);
                 break;
 
+            // Longer lexeme
             case '/':
+                // Check for comments
+                // TODO: nested comments support
                 if(match('/')) {
+                    // comment goes until '\n' character
                     while(peek() != '\n' && !isAtEnd()) {
                         advance();
                     }
@@ -105,13 +111,16 @@ public class Scanner {
                     }
                     advance();
                 }
+                // Slash Symbol
                 else {
                     addToken(SLASH);
                 }
                 break;
-            case ' ': break;
-            case '\r': break;
-            case '\t': break;
+            case ' ':
+            case '\r':
+            case '\t':
+                // Ignore whitespaces
+                break;
 
             case '\n': line++; break;
             case '"': string(); break;

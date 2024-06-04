@@ -1,13 +1,143 @@
-var a=2+3;
 
-print a;
-
-fun check(a,b) {
-    return a+b;
+/* Example Test Case 1*/
+for (var i = 1; i < 5; i = i + 1) {
+  //print i * i;
 }
 
-var a1= "rohit";
-a1 = a1 +" 4";
-print a1;
 
-var b="G5_Final_Year";
+fun adder(i) {
+    var n=5;
+    return n + i;
+}
+
+//print adder(1);
+//print adder(100);
+
+// Output:
+// 1
+// 4
+// 9
+// 16
+// 6
+// 105
+
+/* Class Test Case 1 */
+class A {
+  method() {
+    print "A method";
+  }
+}
+
+class B < A {
+  method() {
+    print "B method";
+  }
+
+  test() {
+    super.method();
+  }
+}
+
+class C < B {}
+
+//C().test();
+
+
+
+
+/* Class Test Case 2 */
+class Cake {
+  taste() {
+    var adjective = "delicious";
+    print "The " + this.flavor + " cake is " + adjective + "!";
+  }
+}
+
+var cake = Cake();
+cake.flavor = "German chocolate";
+//cake.taste(); // Prints "The German chocolate cake is delicious!".
+
+
+
+fun factorial(n) {
+    if (n <= 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+var number = 7;
+var result = factorial(number);
+//print "Factorial of given number is : " + result;
+
+
+
+
+// Linked List Example
+
+class Node {
+  //var data;
+  //var next;
+  init(data, nextNode) {
+    this.data = data;
+    this.next = nextNode;
+  }
+}
+
+class LinkedList {
+  //var head;
+  //var tail;
+   init() {
+    this.head = nil;
+    this.tail = nil;
+    this.length=0;
+  }
+
+   append(data) {
+    var newNode = Node(data, nil);
+    //newNode.init(data, nil);
+    if (this.head == nil) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+    this.length = this.length + 1;
+  }
+
+   printList() {
+    var current = this.head;
+    while (current != nil) {
+      print(current.data);
+      print(" -> ");
+      current = current.next;
+    }
+    print "nil";
+  }
+
+  delLast(){
+  var current = this.head;
+      while (current.next != this.tail) {
+        current = current.next;
+      }
+      current.next=nil;
+      this.length=this.length-1;
+  }
+  getLength() {
+      return this.length;
+    }
+}
+
+var list = LinkedList();
+list.init();
+list.append(1);
+list.append(2);
+list.append(3);
+list.append(4);
+list.delLast();
+list.printList();
+print(list.getLength());
+
+
+
